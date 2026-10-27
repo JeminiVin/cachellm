@@ -1,0 +1,24 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model ApiKey {
+  id         String   @id @default(uuid())
+  user_id    String
+  key_secret String   @unique
+  name       String
+  createdAt  DateTime @default(now())
+}
+
+model AnalyticsLog {
+  id           String   @id @default(uuid())
+  user_id      String
+  cache_hit    Boolean  @default(false)
+  latency_ms   Int
+  money_saved  Float    @default(0.0)
+  createdAt    DateTime @default(now())
+}
